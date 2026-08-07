@@ -12,6 +12,7 @@ const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 
 const agendaRoutes = require('./src/modules/agenda/routes');
+const profileRoutes = require('./src/modules/profiles/routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Rotas ---
 app.use('/', agendaRoutes);
+app.use('/', profileRoutes);
 
 // --- Página 404 ---
 app.use((req, res) => {

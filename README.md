@@ -8,17 +8,30 @@ Conectar bandas, produtores, casas de show, profissionais e público através de
 
 ## Status
 
-🟢 Módulo 01 — Agenda da Cena (v0.1)
+🟢 Módulo 02 — Perfil dos Projetos (v0.2)
 
-Primeiro módulo funcional desenvolvido: calendário de eventos, festivais, oportunidades e datas disponíveis.
+Infraestrutura de identidade profissional integrada à Agenda da Cena.
 
 ## Funcionalidades
+
+### Módulo 01 — Agenda da Cena
 
 - **Agenda da Cena** — calendário centralizado de eventos;
 - **Eventos** — cadastro e página de detalhes;
 - **Festivais** — estrutura Festival → Edição → Eventos;
 - **Oportunidades** — divulgação de vagas e chamadas abertas;
 - **Datas Disponíveis** — disponibilidade de casas de show e bandas.
+
+### Módulo 02 — Perfil dos Projetos
+
+- **Sistema multi-entidade** — bandas, artistas solo, produtores, casas de show, profissionais e festivais;
+- **Perfis profissionais** — portfólio padronizado para descoberta e contratação;
+- **Portfólio** — galeria de fotos, vídeos, release, rider técnico e clipping;
+- **Lançamentos** — singles, EPs, álbuns e ao vivo com links de streaming;
+- **Contatos separados** — públicos (redes sociais) e profissionais (e-mail, WhatsApp);
+- **Disponibilidade** — shows, festivais, eventos corporativos e cachê privado;
+- **Busca de perfis** — por nome, cidade, estado, tipo e estilo musical;
+- **Integração com a Agenda** — próximos eventos exibidos no perfil.
 
 ## Como executar localmente
 
@@ -46,17 +59,20 @@ Acesse `http://localhost:3000`.
 
 ## Documentação
 
-- [Protótipo v0.1](docs/product/001-prototipo-ondahub.md)
+- [Protótipo v0.1 — Agenda da Cena](docs/product/001-prototipo-ondahub.md)
+- [Protótipo v0.2 — Perfis Profissionais da Cena](docs/product/002-prototipo-ondahub.md)
 
 ## Roadmap
 
 - [x] Pesquisa com bandas
 - [x] Módulo 01 — Agenda da Cena
-- [ ] Integração com perfis
+- [x] Módulo 02 — Perfil dos Projetos
 - [ ] Sistema de inscrições
 - [ ] Mapa da cena
 - [ ] Agenda pública
 - [ ] Notificações
+- [ ] Verificação comunitária
+- [ ] Press kit automático
 
 ## Como participar
 

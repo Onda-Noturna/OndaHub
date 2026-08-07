@@ -6,6 +6,10 @@
 
 Primeiro módulo funcional do OndaHub, responsável por centralizar informações sobre eventos da cena independente.
 
+> **Versão atual:** v0.2 — [Perfis Profissionais da Cena](002-prototipo-ondahub.md)
+>
+> O Módulo 02 (Perfil dos Projetos) foi implementado e está documentado no documento `002-prototipo-ondahub.md`.
+
 ---
 
 ## Por que foi criado

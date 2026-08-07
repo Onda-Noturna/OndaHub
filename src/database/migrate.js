@@ -11,7 +11,11 @@
  */
 
 const sequelize = require('../config/database');
-const models = require('../modules/agenda/models');
+const agendaModels = require('../modules/agenda/models');
+const profileModels = require('../modules/profiles/models');
+
+// Combina todos os modelos da aplicação
+const models = { ...agendaModels, ...profileModels };
 
 async function migrate() {
   try {

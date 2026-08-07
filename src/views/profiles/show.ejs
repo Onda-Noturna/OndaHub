@@ -1,0 +1,208 @@
+<% var profile = organization.profile || {}; %>
+
+<!-- Banner -->
+<% if (profile.banner_path) { %>
+  <div class="profile-banner" style="background-image: url('<%= profile.banner_path %>');"></div>
+<% } else { %>
+  <div class="profile-banner profile-banner-placeholder"></div>
+<% } %>
+
+<div class="profile-header">
+  <div class="profile-logo">
+    <% if (profile.logo_path) { %>
+      <img src="<%= profile.logo_path %>" alt="Logo de <%= organization.name %>">
+    <% } else { %>
+      <span class="profile-logo-placeholder"><%= organization.name.charAt(0) %></span>
+    <% } %>
+  </div>
+  <div class="profile-title">
+    <h1><%= organization.name %></h1>
+    <p class="profile-meta">
+      <%= organization.type.replace('_', ' ') %>
+      <% if (organization.city) { %> · <%= organization.city %><% } %><%= organization.state ? ' - ' + organization.state : '' %>
+      <% if (profile.genre) { %> · <%= profile.genre %><% } %>
+      <% if (profile.founded_year) { %> · desde <%= profile.founded_year %><% } %>
+    </p>
+    <% if (profile.status) { %>
+      <span class="badge badge-<%= profile.status === 'ativo' ? 'confirmado' : (profile.status === 'em_pausa' ? 'planejado' : 'cancelado') %>"><%= profile.status.replace('_', ' ') %></span>
+    <% } %>
+  </div>
+</div>
+
+<div class="profile-layout">
+  <!-- Conteúdo principal -->
+  <div class="profile-main">
+    <% if (profile.short_description) { %>
+    <div class="detail-body">
+      <h2>Sobre</h2>
+      <p><%= profile.short_description %></p>
+      <% if (profile.full_description) { %>
+        <p style="margin-top: 12px;"><%= profile.full_description %></p>
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- Portfólio: Fotos -->
+    <% if (organization.images && organization.images.length > 0) { %>
+    <div class="detail-body">
+      <h2>Galeria</h2>
+      <div class="gallery-grid">
+        <% organization.images.forEach(function(img) { %>
+          <div class="gallery-item">
+            <img src="<%= img.path %>" alt="<%= img.caption || organization.name %>">
+            <% if (img.caption) { %><p class="gallery-caption"><%= img.caption %></p><% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Portfólio: Vídeos -->
+    <% if (organization.videos && organization.videos.length > 0) { %>
+    <div class="detail-body">
+      <h2>Vídeos</h2>
+      <ul class="list-group">
+        <% organization.videos.forEach(function(video) { %>
+          <li>
+            <a href="<%= video.url %>" target="_blank" rel="noopener"><%= video.title %></a>
+            <span style="color: var(--color-white-dim); font-size: 0.85rem;"> — <%= video.platform %></span>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+
+    <!-- Portfólio: Documentos -->
+    <% if (organization.documents && organization.documents.length > 0) { %>
+    <div class="detail-body">
+      <h2>Documentos</h2>
+      <ul class="list-group">
+        <% organization.documents.forEach(function(doc) { %>
+          <li>
+            <strong><%= doc.title %></strong>
+            <span style="color: var(--color-white-dim); font-size: 0.85rem;"> — <%= doc.type %></span>
+            <% if (doc.path) { %>
+              <br><a href="<%= doc.path %>" target="_blank" rel="noopener">Baixar arquivo</a>
+            <% } %>
+            <% if (doc.content) { %>
+              <p style="color: var(--color-white-dim); font-size: 0.9rem; margin-top: 6px;"><%= doc.content %></p>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+
+    <!-- Lançamentos -->
+    <% if (organization.releases && organization.releases.length > 0) { %>
+    <div class="detail-body">
+      <h2>Lançamentos</h2>
+      <div class="card-grid">
+        <% organization.releases.forEach(function(release) { %>
+          <article class="card">
+            <div class="card-meta">
+              <%= release.type.replace('_', ' ') %>
+              <% if (release.release_date) { %> · <%= new Date(release.release_date).toLocaleDateString('pt-BR') %><% } %>
+            </div>
+            <h3 class="card-title"><%= release.title %></h3>
+            <% if (release.description) { %>
+              <p class="card-desc"><%= release.description %></p>
+            <% } %>
+            <% if (release.links && release.links.length > 0) { %>
+              <div class="release-links">
+                <% release.links.forEach(function(link) { %>
+                  <a href="<%= link.url %>" target="_blank" rel="noopener" class="release-link"><%= link.platform %></a>
+                <% }) %>
+              </div>
+            <% } %>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- Contatos profissionais -->
+    <% if (organization.professionalContacts && organization.professionalContacts.length > 0) { %>
+    <div class="detail-body">
+      <h2>Contato profissional</h2>
+      <% organization.professionalContacts.forEach(function(contact) { %>
+        <div class="detail-info">
+          <% if (contact.name) { %>
+          <div class="detail-info-item">
+            <span class="label">Responsável</span>
+            <span class="value"><%= contact.name %></span>
+          </div>
+          <% } %>
+          <% if (contact.email) { %>
+          <div class="detail-info-item">
+            <span class="label">E-mail</span>
+            <span class="value"><a href="mailto:<%= contact.email %>"><%= contact.email %></a></span>
+          </div>
+          <% } %>
+          <% if (contact.phone) { %>
+          <div class="detail-info-item">
+            <span class="label">Telefone</span>
+            <span class="value"><%= contact.phone %></span>
+          </div>
+          <% } %>
+          <% if (contact.whatsapp && contact.public_whatsapp) { %>
+          <div class="detail-info-item">
+            <span class="label">WhatsApp</span>
+            <span class="value"><%= contact.whatsapp %></span>
+          </div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+
+  <!-- Lateral -->
+  <aside class="profile-sidebar">
+    <!-- Disponibilidade -->
+    <% if (organization.availability) { %>
+    <div class="detail-body">
+      <h2>Disponibilidade</h2>
+      <ul class="list-group">
+        <li>Aceita shows: <%= organization.availability.accepts_shows ? 'Sim' : 'Não' %></li>
+        <li>Aceita festivais: <%= organization.availability.accepts_festivals ? 'Sim' : 'Não' %></li>
+        <li>Aceita eventos corporativos: <%= organization.availability.accepts_corporate ? 'Sim' : 'Não' %></li>
+        <% if (organization.availability.region) { %><li>Região: <%= organization.availability.region %></li><% } %>
+        <% if (organization.availability.preferred_days) { %><li>Dias: <%= organization.availability.preferred_days %></li><% } %>
+        <% if (organization.availability.needs_support) { %><li>Necessita ajuda de custo</li><% } %>
+      </ul>
+    </div>
+    <% } %>
+
+    <!-- Redes sociais -->
+    <% if (organization.publicContacts && organization.publicContacts.length > 0) { %>
+    <div class="detail-body">
+      <h2>Redes</h2>
+      <ul class="list-group">
+        <% organization.publicContacts.forEach(function(contact) { %>
+          <li><a href="<%= contact.url %>" target="_blank" rel="noopener"><%= contact.platform %></a></li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+
+    <!-- Próximos eventos (integração com Agenda da Cena) -->
+    <% if (upcomingEvents && upcomingEvents.length > 0) { %>
+    <div class="detail-body">
+      <h2>Próximos eventos</h2>
+      <ul class="list-group">
+        <% upcomingEvents.forEach(function(event) { %>
+          <li>
+            <a href="/eventos/<%= event.id %>"><%= event.title %></a>
+            <span style="color: var(--color-white-dim); font-size: 0.85rem;">
+              — <%= new Date(event.date).toLocaleDateString('pt-BR') %>
+            </span>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+    <% } %>
+  </aside>
+</div>
+
+<p><a href="/perfis">← Voltar para perfis</a></p>
