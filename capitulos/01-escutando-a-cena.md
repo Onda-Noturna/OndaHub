@@ -1,6 +1,3 @@
-Vou estruturar como capítulo de documentação do OndaHub, em formato `.md`, com linguagem de diagnóstico da cena e sem expor nomes ou respostas individuais das bandas. A ideia é transformar a pesquisa em um documento estratégico: **escutar antes de construir**.
-
-```md
 # 01 - Escutando a Cena
 
 ## Diagnóstico da Música Independente a partir da comunidade
