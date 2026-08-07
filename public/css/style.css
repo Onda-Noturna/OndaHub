@@ -1,0 +1,438 @@
+/* ============================================
+   OndaHub — Estilo visual
+   Identidade: Onda Noturna
+   Cores: Preto (principal) · Branco (secundária) · Vermelho (destaque)
+   Estética: Underground · Tecnológica · Noturna · Minimalista
+   ============================================ */
+
+:root {
+  --color-black: #0a0a0a;
+  --color-black-soft: #141414;
+  --color-black-card: #1a1a1a;
+  --color-white: #f5f5f5;
+  --color-white-dim: #a0a0a0;
+  --color-red: #e63946;
+  --color-red-bright: #ff4d5a;
+  --color-border: #2a2a2a;
+  --font-mono: 'Courier New', Courier, monospace;
+  --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --radius: 6px;
+  --transition: 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-red);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-red-bright);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+
+.site-header {
+  background: var(--color-black-soft);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.logo-symbol {
+  color: var(--color-red);
+  font-size: 1.4rem;
+  text-shadow: 0 0 10px rgba(230, 57, 70, 0.6);
+}
+
+.logo-accent {
+  color: var(--color-red);
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  color: var(--color-white-dim);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+}
+
+.main-nav a:hover {
+  color: var(--color-white);
+  border-color: var(--color-border);
+}
+
+.main-nav a.active {
+  color: var(--color-red);
+  border-color: var(--color-red);
+  background: rgba(230, 57, 70, 0.08);
+}
+
+/* ============================================
+   Main
+   ============================================ */
+
+.site-main {
+  flex: 1;
+  padding: 40px 0 60px;
+}
+
+.page-title {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: var(--color-white);
+}
+
+.page-title::before {
+  content: '> ';
+  color: var(--color-red);
+}
+
+.page-subtitle {
+  color: var(--color-white-dim);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   Cards / Grid
+   ============================================ */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--color-black-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card:hover {
+  border-color: var(--color-red);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-red);
+  letter-spacing: 0.5px;
+}
+
+.card-desc {
+  color: var(--color-white-dim);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.card-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   Status badges
+   ============================================ */
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.badge-planejado {
+  color: #ffd166;
+  border-color: #ffd166;
+  background: rgba(255, 209, 102, 0.08);
+}
+
+.badge-confirmado {
+  color: #4ecdc4;
+  border-color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.08);
+}
+
+.badge-cancelado {
+  color: var(--color-red);
+  border-color: var(--color-red);
+  background: rgba(230, 57, 70, 0.08);
+}
+
+.badge-finalizado {
+  color: var(--color-white-dim);
+  border-color: var(--color-white-dim);
+  background: rgba(160, 160, 160, 0.08);
+}
+
+.badge-aberta {
+  color: #4ecdc4;
+  border-color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.08);
+}
+
+.badge-encerrada {
+  color: var(--color-red);
+  border-color: var(--color-red);
+  background: rgba(230, 57, 70, 0.08);
+}
+
+/* ============================================
+   Detail page
+   ============================================ */
+
+.detail-hero {
+  background: var(--color-black-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.detail-hero h1 {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.detail-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.detail-info-item {
+  border-left: 2px solid var(--color-red);
+  padding-left: 12px;
+}
+
+.detail-info-item .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-white-dim);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.detail-info-item .value {
+  font-size: 0.95rem;
+  color: var(--color-white);
+}
+
+.detail-body {
+  background: var(--color-black-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.detail-body h2 {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--color-red);
+  margin-bottom: 12px;
+}
+
+.detail-body p {
+  color: var(--color-white-dim);
+}
+
+/* ============================================
+   Listas
+   ============================================ */
+
+.list-group {
+  list-style: none;
+}
+
+.list-group li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.list-group li:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.site-footer {
+  background: var(--color-black-soft);
+  border-top: 1px solid var(--color-border);
+  padding: 24px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-white-dim);
+}
+
+.footer-meta {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* ============================================
+   Error page
+   ============================================ */
+
+.error-box {
+  text-align: center;
+  padding: 60px 20px;
+  border: 1px solid var(--color-red);
+  border-radius: var(--radius);
+  background: var(--color-black-card);
+}
+
+.error-box .error-code {
+  font-family: var(--font-mono);
+  font-size: 3rem;
+  color: var(--color-red);
+  text-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
+}
+
+.error-box h1 {
+  margin: 16px 0 8px;
+}
+
+.error-box p {
+  color: var(--color-white-dim);
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   Empty state
+   ============================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--color-white-dim);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* ============================================
+   Responsividade
+   ============================================ */
+
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .main-nav {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .main-nav a {
+    white-space: nowrap;
+  }
+
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+  .detail-hero {
+    padding: 20px;
+  }
+
+  .detail-hero h1 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-main {
+    padding: 24px 0 40px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}

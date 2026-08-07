@@ -1,0 +1,27 @@
+<h1 class="page-title">Agenda da Cena</h1>
+<p class="page-subtitle">Calendário centralizado dos eventos da cena independente.</p>
+
+<% if (events.length === 0) { %>
+  <div class="empty-state">
+    <p>Nenhum evento cadastrado ainda.</p>
+  </div>
+<% } else { %>
+  <div class="card-grid">
+    <% events.forEach(function(event) { %>
+      <article class="card">
+        <div class="card-meta">
+          <%= new Date(event.date).toLocaleDateString('pt-BR') %>
+          <% if (event.start_time) { %> · <%= event.start_time %><% } %>
+        </div>
+        <h2 class="card-title"><%= event.title %></h2>
+        <p class="card-desc">
+          <%= event.location ? event.location + ' — ' : '' %><%= event.city ? event.city : '' %><%= event.state ? ' - ' + event.state : '' %>
+        </p>
+        <div>
+          <span class="badge badge-<%= event.status %>"><%= event.status %></span>
+        </div>
+        <a class="card-link" href="/eventos/<%= event.id %>">Ver detalhes →</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>

@@ -1,0 +1,32 @@
+<div class="detail-hero">
+  <h1><%= opportunity.title %></h1>
+  <span class="badge badge-<%= opportunity.status %>"><%= opportunity.status %></span>
+
+  <div class="detail-info">
+    <div class="detail-info-item">
+      <span class="label">Categoria</span>
+      <span class="value"><%= opportunity.category %></span>
+    </div>
+    <% if (opportunity.responsible) { %>
+    <div class="detail-info-item">
+      <span class="label">Responsável</span>
+      <span class="value"><%= opportunity.responsible %></span>
+    </div>
+    <% } %>
+    <% if (opportunity.deadline) { %>
+    <div class="detail-info-item">
+      <span class="label">Inscrições até</span>
+      <span class="value"><%= new Date(opportunity.deadline).toLocaleDateString('pt-BR') %></span>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<% if (opportunity.description) { %>
+<div class="detail-body">
+  <h2>Descrição</h2>
+  <p><%= opportunity.description %></p>
+</div>
+<% } %>
+
+<p><a href="/oportunidades">← Voltar para oportunidades</a></p>

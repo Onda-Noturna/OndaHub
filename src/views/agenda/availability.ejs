@@ -1,0 +1,24 @@
+<h1 class="page-title">Datas Disponíveis</h1>
+<p class="page-subtitle">Disponibilidade de casas de show, bandas e agentes da cena.</p>
+
+<% if (availabilityDates.length === 0) { %>
+  <div class="empty-state">
+    <p>Nenhuma data disponível cadastrada ainda.</p>
+  </div>
+<% } else { %>
+  <div class="card-grid">
+    <% availabilityDates.forEach(function(item) { %>
+      <article class="card">
+        <div class="card-meta">
+          <%= new Date(item.date).toLocaleDateString('pt-BR') %>
+        </div>
+        <h2 class="card-title">
+          <%= item.entity_type === 'venue' ? 'Casa de show' : (item.entity_type === 'band' ? 'Banda' : item.entity_type) %>
+        </h2>
+        <p class="card-desc">
+          <%= item.description ? item.description : 'Disponível' %>
+        </p>
+      </article>
+    <% }) %>
+  </div>
+<% } %>

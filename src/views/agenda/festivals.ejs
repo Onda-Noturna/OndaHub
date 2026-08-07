@@ -1,0 +1,27 @@
+<h1 class="page-title">Festivais</h1>
+<p class="page-subtitle">Festivais da cena independente e suas edições.</p>
+
+<% if (festivals.length === 0) { %>
+  <div class="empty-state">
+    <p>Nenhum festival cadastrado ainda.</p>
+  </div>
+<% } else { %>
+  <div class="card-grid">
+    <% festivals.forEach(function(festival) { %>
+      <article class="card">
+        <h2 class="card-title"><%= festival.name %></h2>
+        <p class="card-desc">
+          <%= festival.organization ? festival.organization + ' — ' : '' %><%= festival.city ? festival.city : '' %><%= festival.state ? ' - ' + festival.state : '' %>
+        </p>
+        <div class="card-meta">
+          <% if (festival.editions && festival.editions.length > 0) { %>
+            <%= festival.editions.length %> edição(ões) · <%= festival.editions[0].year %>
+          <% } else { %>
+            Sem edições cadastradas
+          <% } %>
+        </div>
+        <a class="card-link" href="/festivais/<%= festival.id %>">Ver detalhes →</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>
