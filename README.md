@@ -6,13 +6,32 @@ Uma plataforma colaborativa para fortalecer a cena independente.
 
 Conectar bandas, produtores, casas de show, profissionais e público através de uma infraestrutura transparente e colaborativa.
 
-## Status
+## Estado atual do projeto
 
-🟢 Módulo 02 — Perfil dos Projetos (v0.2)
+O OndaHub está passando por um **reposicionamento estratégico**.
 
-Infraestrutura de identidade profissional integrada à Agenda da Cena.
+A proposta inicial era um hub/mapa da cena independente. Após conhecer o Setorial Cultura Rock e o Portal Mapa do Rock Brasil, a Onda Noturna decidiu **não competir** com o Mapa do Rock e reposicionar o OndaHub como:
 
-## Funcionalidades
+> **Infraestrutura comunitária de colaboração e ativação da cena.**
+
+### Histórico
+
+**Versão inicial:**
+Mapa/hub da cena — cadastro de bandas, perfis, eventos, festivais, oportunidades, agenda, networking e profissionais da cena.
+
+**Nova direção:**
+Infraestrutura comunitária de colaboração — oportunidades, projetos, comunidades, recursos compartilhados e produção.
+
+### Documentação
+
+- [Protótipo v0.1 — Agenda da Cena](docs/product/001-prototipo-ondahub.md)
+- [Protótipo v0.2 — Perfis Profissionais da Cena](docs/product/002-prototipo-ondahub.md)
+- [Reposicionamento Estratégico](docs/product/003-reposicionamento-estrategico.md)
+- [Roadmap do Novo Ciclo](docs/product/004-roadmap-novo-ondahub.md)
+
+---
+
+## Funcionalidades existentes (fase inicial)
 
 ### Módulo 01 — Agenda da Cena
 
@@ -57,22 +76,17 @@ Acesse `http://localhost:3000`.
 - Suporte a **PostgreSQL**, **MySQL** e **MariaDB** via variáveis de ambiente;
 - Configuração centralizada em `src/config/database.js`.
 
-## Documentação
-
-- [Protótipo v0.1 — Agenda da Cena](docs/product/001-prototipo-ondahub.md)
-- [Protótipo v0.2 — Perfis Profissionais da Cena](docs/product/002-prototipo-ondahub.md)
-
 ## Roadmap
 
 - [x] Pesquisa com bandas
 - [x] Módulo 01 — Agenda da Cena
 - [x] Módulo 02 — Perfil dos Projetos
-- [ ] Sistema de inscrições
-- [ ] Mapa da cena
-- [ ] Agenda pública
-- [ ] Notificações
-- [ ] Verificação comunitária
-- [ ] Press kit automático
+- [ ] Reposicionamento estratégico (documentado)
+- [ ] Mural de oportunidades
+- [ ] Projetos colaborativos
+- [ ] Comunidades
+- [ ] Biblioteca de recursos
+- [ ] Agenda como infraestrutura de apoio
 
 ## Como participar
 
