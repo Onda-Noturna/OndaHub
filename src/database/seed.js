@@ -2,6 +2,7 @@
  * OndaHub — Dados fictícios iniciais (seed)
  *
  * Popula o banco com exemplos para desenvolvimento e demonstração.
+ * Limpa as tabelas antes de inserir para evitar duplicatas.
  *
  * Uso: npm run db:seed
  */
@@ -26,12 +27,19 @@ const {
   ProfessionalContact,
   Availability,
 } = require('../modules/profiles/models');
+const { User } = require('../modules/auth/models');
+const { Community, CommunityMember } = require('../modules/community/models');
+const { Resource } = require('../modules/resource/models');
 
 async function seed() {
   try {
     console.log('🔄 Conectando ao banco de dados...');
     await sequelize.authenticate();
     console.log(`✅ Conexão estabelecida (driver: ${sequelize.getDialect()})`);
+
+    console.log('🔄 Limpando tabelas existentes...');
+    // Limpa dados existentes para evitar duplicatas (ordem respeita dependências FK)
+    await sequelize.truncate({ cascade: true, restartIdentity: true });
 
     console.log('🔄 Inserindo dados fictícios...');
 
@@ -219,6 +227,17 @@ async function seed() {
       ],
       {}
     );
+
+    // ==========================================
+    // USUÁRIOS (autenticação)
+    // ==========================================
+    const demoUser = await User.create({
+      name: 'Usuário Demo',
+      email: 'demo@ondahub.example',
+      password_hash: 'demo123', // será hasheado pelo hook beforeSave
+      city: 'Brasília',
+      state: 'DF',
+    });
 
     // ==========================================
     // MÓDULO 02 — PERFIS DOS PROJETOS
@@ -465,6 +484,52 @@ async function seed() {
       cache_private: true,
     });
 
+    // ==========================================
+    // MÓDULO 03 — COMUNIDADES
+    // ==========================================
+    const rockBrasilia = await Community.create({
+      name: 'Rock Brasília',
+      description: 'Comunidade de rock independente do Distrito Federal.',
+      type: 'territorio',
+    });
+    await CommunityMember.create({
+      community_id: rockBrasilia.id,
+      user_id: demoUser.id,
+      role: 'admin',
+    });
+
+    const metalDF = await Community.create({
+      name: 'Metal DF',
+      description: 'Comunidade de fãs e bandas de metal do Distrito Federal.',
+      type: 'estilo',
+    });
+    await CommunityMember.create({
+      community_id: metalDF.id,
+      user_id: demoUser.id,
+      role: 'membro',
+    });
+
+    // ==========================================
+    // MÓDULO 04 — BIBLIOTECA DE RECURSOS
+    // ==========================================
+    await Resource.create({
+      title: 'Sistema de Som Completo',
+      description: 'P.A. 2000W com microfones e amplificadores.',
+      type: 'equipamento',
+    });
+
+    await Resource.create({
+      title: 'Espaço de Ensaios',
+      description: 'Local coberto e climatizado para ensaios de bandas.',
+      type: 'espaco',
+    });
+
+    await Resource.create({
+      title: 'Base de Conhecimento Metal',
+      description: 'Guias, tabs e materiais sobre técnica de metal.',
+      type: 'conhecimento',
+    });
+
     console.log('✅ Seed concluído com sucesso!');
     console.log(`   - ${events.length} eventos`);
     console.log(`   - ${festivals.length} festivais`);
@@ -472,8 +537,18 @@ async function seed() {
     console.log('   - Oportunidades criadas');
     console.log('   - Datas disponíveis criadas');
     console.log('   - Perfis de organizações criados (Módulo 02)');
+    console.log('   - Comunidades criadas (Módulo 03)');
+    console.log('   - Recursos criados (Módulo 04)');
+    console.log('   - Usuário demo criado (demo@ondahub.example / demo123)');
   } catch (error) {
     console.error('❌ Erro ao executar seed:', error.message);
+    if (error.errors && error.errors.length > 0) {
+      error.errors.forEach((e) => {
+        console.error(`   → Campo: ${e.path || e.field || 'desconhecido'}`);
+        console.error(`   → Mensagem: ${e.message}`);
+        console.error(`   → Valor: ${JSON.stringify(e.value)}`);
+      });
+    }
     process.exit(1);
   } finally {
     await sequelize.close();

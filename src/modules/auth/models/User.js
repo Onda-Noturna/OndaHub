@@ -1,0 +1,78 @@
+/**
+ * OndaHub — Modelo de Usuário
+ *
+ * Representa uma pessoa que utiliza a plataforma.
+ * Uma pessoa pode administrar uma ou mais entidades (bandas,
+ * coletivos, projetos, organizações).
+ *
+ * Usuário e projeto cultural NÃO são a mesma coisa.
+ */
+
+const { DataTypes } = require('sequelize');
+const sequelize = require('../../../config/database');
+const bcrypt = require('bcryptjs');
+
+const User = sequelize.define(
+  'User',
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password_hash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    state: {
+      type: DataTypes.STRING(2),
+      allowNull: true,
+    },
+  },
+  {
+    tableName: 'users',
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+    hooks: {
+      // Hash da senha antes de criar/atualizar
+      beforeSave: async (user) => {
+        if (user.changed('password_hash')) {
+          user.password_hash = await bcrypt.hash(user.password_hash, 10);
+        }
+      },
+    },
+  }
+);
+
+User.prototype.comparePassword = function (password) {
+  return bcrypt.compare(password, this.password_hash);
+};
+
+User.associate = function (models) {
+  // Associação opcional: só cria se o modelo Organization estiver carregado
+  if (models.Organization) {
+    User.hasMany(models.Organization, {
+      foreignKey: 'user_id',
+      as: 'organizations',
+    });
+  }
+};
+
+module.exports = User;

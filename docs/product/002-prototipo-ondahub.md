@@ -18,6 +18,33 @@ Segundo módulo funcional do OndaHub, responsável por criar uma identidade prof
 - **Disponibilidade** — aceita shows, festivais, eventos corporativos, região, dias preferenciais e cachê privado;
 - **Busca de perfis** — busca textual com filtros por tipo, cidade, estado e estilo musical.
 
+## Módulo 03 — Comunidades (adicional)
+
+Adiciona suporte a comunidades de afinidade, território ou estilo musical.
+
+- **Modelos**: `Community`, `CommunityMember`
+- **Tipos de comunidade**: `territorio`, `estilo`, `profissao`, `projeto`, `organizacao`
+- **Papéis**: `membro`, `moderador`, `admin`
+- **Rotas principais**:
+  - `GET /comunidades` — Listar todas as comunidades
+  - `GET /comunidades/:id` — Detalhes da comunidade
+  - `POST /comunidades/:id/join` — Entrar na comunidade
+  - `POST /comunidades/:id/leave` — Sair da comunidade
+  - `GET /comunidades/:id/members` — Listar membros
+
+## Módulo 04 — Biblioteca de Recursos (adicional)
+
+Permite o compartilhamento de equipamentos, espaços e conhecimento entre os membros da cena.
+
+- **Modelos**: `Resource`
+- **Tipos de recurso**: `equipamento`, `espaco`, `conhecimento`, `contato`, `material`
+- **Rotas principais**:
+  - `GET /recursos` — Listar todos os recursos
+  - `GET /recursos/:id` — Detalhes do recurso
+  - `POST /recursos` — Criar um novo recurso
+  - `PUT /recursos/:id` — Atualizar um recurso
+  - `DELETE /recursos/:id` — Remover um recurso
+
 ---
 
 ## Por que foi desenvolvido

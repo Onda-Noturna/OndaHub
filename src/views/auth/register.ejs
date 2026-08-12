@@ -1,0 +1,39 @@
+<h1 class="page-title">Criar conta</h1>
+<p class="page-subtitle">Participe da comunidade e colabore com a cena independente.</p>
+
+<div class="detail-body">
+  <% if (error) { %>
+    <div class="alert alert-error"><%= error %></div>
+  <% } %>
+
+  <form method="POST" action="/cadastrar" class="form-stack">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input type="text" id="name" name="name" value="<%= form.name || '' %>" required>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" value="<%= form.email || '' %>" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" id="password" name="password" required>
+      <small style="color: var(--color-white-dim);">Mínimo de 6 caracteres.</small>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="city">Cidade</label>
+        <input type="text" id="city" name="city" value="<%= form.city || '' %>">
+      </div>
+      <div class="form-group">
+        <label for="state">Estado</label>
+        <input type="text" id="state" name="state" maxlength="2" value="<%= form.state || '' %>" placeholder="DF">
+      </div>
+    </div>
+    <button type="submit" class="btn">Criar conta</button>
+  </form>
+
+  <p style="margin-top: 16px; color: var(--color-white-dim);">
+    Já tem conta? <a href="/entrar">Entrar</a>
+  </p>
+</div>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | OndaHub</title>
-  <meta name="description" content="OndaHub — Plataforma colaborativa para fortalecer a cena independente.">
+  <meta name="description" content="OndaHub — Infraestrutura comunitária de colaboração e ativação da cena.">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -15,12 +15,21 @@
         <span class="logo-text">ONDA<span class="logo-accent">HUB</span></span>
       </a>
       <nav class="main-nav" aria-label="Navegação principal">
-        <a href="/" class="<%= activePage === 'agenda' ? 'active' : '' %>">Agenda</a>
-        <a href="/eventos" class="<%= activePage === 'eventos' ? 'active' : '' %>">Eventos</a>
-        <a href="/festivais" class="<%= activePage === 'festivais' ? 'active' : '' %>">Festivais</a>
+        <a href="/" class="<%= activePage === 'agenda' ? 'active' : '' %>">Início</a>
         <a href="/oportunidades" class="<%= activePage === 'oportunidades' ? 'active' : '' %>">Oportunidades</a>
-        <a href="/datas-disponiveis" class="<%= activePage === 'datas-disponiveis' ? 'active' : '' %>">Datas</a>
-        <a href="/perfis" class="<%= activePage === 'perfis' ? 'active' : '' %>">Perfis</a>
+        <a href="/comunidades" class="<%= activePage === 'comunidades' ? 'active' : '' %>">Comunidades</a>
+        <a href="/projetos" class="<%= activePage === 'projetos' ? 'active' : '' %>">Projetos</a>
+        <a href="/recursos" class="<%= activePage === 'recursos' ? 'active' : '' %>">Recursos</a>
+        <a href="/eventos" class="<%= activePage === 'eventos' ? 'active' : '' %>">Agenda</a>
+        <a href="/perfis" class="<%= activePage === 'perfis' ? 'active' : '' %>">Explorar</a>
+        <% if (currentUser) { %>
+          <a href="/perfil" class="<%= activePage === 'perfil' ? 'active' : '' %>">Perfil</a>
+          <form method="POST" action="/sair" style="display:inline;">
+            <button type="submit" class="nav-logout">Sair</button>
+          </form>
+        <% } else { %>
+          <a href="/entrar" class="<%= activePage === 'auth' ? 'active' : '' %>">Entrar</a>
+        <% } %>
       </nav>
     </div>
   </header>
