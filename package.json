@@ -1,0 +1,35 @@
+{
+  "name": "ondahub",
+  "version": "0.1.0",
+  "description": "Plataforma colaborativa para fortalecer a cena independente — Módulo 01: Agenda da Cena",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:migrate": "node src/database/migrate.js",
+    "db:seed": "node src/database/seed.js",
+    "db:setup": "npm run db:migrate && npm run db:seed"
+  },
+  "keywords": [
+    "ondahub",
+    "cena-independente",
+    "agenda",
+    "open-source"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "method-override": "^3.0.0",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

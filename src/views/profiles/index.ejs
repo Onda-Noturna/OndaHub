@@ -1,0 +1,54 @@
+<h1 class="page-title">Perfis da Cena</h1>
+<p class="page-subtitle">Portfólios profissionais padronizados para descoberta e contratação.</p>
+
+<!-- Busca e filtros -->
+<div class="search-box">
+  <form method="GET" action="/perfis" class="search-form">
+    <input type="text" name="q" placeholder="Buscar por nome ou cidade..." value="<%= filters.q || '' %>">
+    <select name="type">
+      <option value="">Todos os tipos</option>
+      <option value="band" <%= filters.type === 'band' ? 'selected' : '' %>>Banda</option>
+      <option value="solo_artist" <%= filters.type === 'solo_artist' ? 'selected' : '' %>>Artista solo</option>
+      <option value="producer" <%= filters.type === 'producer' ? 'selected' : '' %>>Produtor</option>
+      <option value="venue" <%= filters.type === 'venue' ? 'selected' : '' %>>Casa de show</option>
+      <option value="professional" <%= filters.type === 'professional' ? 'selected' : '' %>>Profissional</option>
+      <option value="festival" <%= filters.type === 'festival' ? 'selected' : '' %>>Festival</option>
+    </select>
+    <select name="genre">
+      <option value="">Todos os estilos</option>
+      <option value="Metal" <%= filters.genre === 'Metal' ? 'selected' : '' %>>Metal</option>
+      <option value="Rock" <%= filters.genre === 'Rock' ? 'selected' : '' %>>Rock</option>
+      <option value="Hardcore" <%= filters.genre === 'Hardcore' ? 'selected' : '' %>>Hardcore</option>
+      <option value="Punk" <%= filters.genre === 'Punk' ? 'selected' : '' %>>Punk</option>
+      <option value="Indie" <%= filters.genre === 'Indie' ? 'selected' : '' %>>Indie</option>
+      <option value="Tributo" <%= filters.genre === 'Tributo' ? 'selected' : '' %>>Tributo</option>
+      <option value="Autoral" <%= filters.genre === 'Autoral' ? 'selected' : '' %>>Autoral</option>
+    </select>
+    <button type="submit" class="btn">Buscar</button>
+  </form>
+</div>
+
+<% if (organizations.length === 0) { %>
+  <div class="empty-state">
+    <p>Nenhum perfil encontrado com os filtros selecionados.</p>
+  </div>
+<% } else { %>
+  <div class="card-grid">
+    <% organizations.forEach(function(org) { %>
+      <article class="card">
+        <div class="card-meta">
+          <%= org.type.replace('_', ' ') %>
+          <% if (org.city) { %> · <%= org.city %><% } %><%= org.state ? ' - ' + org.state : '' %>
+        </div>
+        <h2 class="card-title"><%= org.name %></h2>
+        <% if (org.profile && org.profile.short_description) { %>
+          <p class="card-desc"><%= org.profile.short_description %></p>
+        <% } %>
+        <% if (org.profile && org.profile.genre) { %>
+          <div class="card-meta">Estilo: <%= org.profile.genre %></div>
+        <% } %>
+        <a class="card-link" href="/perfis/<%= org.slug %>">Ver perfil →</a>
+      </article>
+    <% }) %>
+  </div>
+<% } %>

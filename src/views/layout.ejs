@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | OndaHub</title>
+  <meta name="description" content="OndaHub — Plataforma colaborativa para fortalecer a cena independente.">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span class="logo-symbol">◉</span>
+        <span class="logo-text">ONDA<span class="logo-accent">HUB</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="/" class="<%= activePage === 'agenda' ? 'active' : '' %>">Agenda</a>
+        <a href="/eventos" class="<%= activePage === 'eventos' ? 'active' : '' %>">Eventos</a>
+        <a href="/festivais" class="<%= activePage === 'festivais' ? 'active' : '' %>">Festivais</a>
+        <a href="/oportunidades" class="<%= activePage === 'oportunidades' ? 'active' : '' %>">Oportunidades</a>
+        <a href="/datas-disponiveis" class="<%= activePage === 'datas-disponiveis' ? 'active' : '' %>">Datas</a>
+        <a href="/perfis" class="<%= activePage === 'perfis' ? 'active' : '' %>">Perfis</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <%- body %>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>OndaHub — infraestrutura comunitária para a cena independente.</p>
+      <p class="footer-meta">Código aberto · Feito pela comunidade · <a href="https://github.com/OndaNoturna/OndaHub" target="_blank" rel="noopener">Contribua</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<div class="detail-hero">
+  <h1><%= event.title %></h1>
+  <span class="badge badge-<%= event.status %>"><%= event.status %></span>
+
+  <div class="detail-info">
+    <div class="detail-info-item">
+      <span class="label">Data</span>
+      <span class="value"><%= new Date(event.date).toLocaleDateString('pt-BR') %></span>
+    </div>
+    <% if (event.start_time) { %>
+    <div class="detail-info-item">
+      <span class="label">Horário</span>
+      <span class="value"><%= event.start_time %><%= event.end_time ? ' — ' + event.end_time : '' %></span>
+    </div>
+    <% } %>
+    <% if (event.location) { %>
+    <div class="detail-info-item">
+      <span class="label">Local</span>
+      <span class="value"><%= event.location %></span>
+    </div>
+    <% } %>
+    <% if (event.city) { %>
+    <div class="detail-info-item">
+      <span class="label">Cidade</span>
+      <span class="value"><%= event.city %><%= event.state ? ' - ' + event.state : '' %></span>
+    </div>
+    <% } %>
+    <% if (event.responsible) { %>
+    <div class="detail-info-item">
+      <span class="label">Responsável</span>
+      <span class="value"><%= event.responsible %></span>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<% if (event.description) { %>
+<div class="detail-body">
+  <h2>Descrição</h2>
+  <p><%= event.description %></p>
+</div>
+<% } %>
+
+<% if (event.external_link) { %>
+<div class="detail-body">
+  <h2>Links relacionados</h2>
+  <p><a href="<%= event.external_link %>" target="_blank" rel="noopener"><%= event.external_link %></a></p>
+</div>
+<% } %>
+
+<p><a href="/eventos">← Voltar para eventos</a></p>

@@ -1,0 +1,61 @@
+<div class="detail-hero">
+  <h1><%= festival.name %></h1>
+
+  <div class="detail-info">
+    <% if (festival.organization) { %>
+    <div class="detail-info-item">
+      <span class="label">Organização</span>
+      <span class="value"><%= festival.organization %></span>
+    </div>
+    <% } %>
+    <% if (festival.city) { %>
+    <div class="detail-info-item">
+      <span class="label">Cidade</span>
+      <span class="value"><%= festival.city %><%= festival.state ? ' - ' + festival.state : '' %></span>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<% if (festival.description) { %>
+<div class="detail-body">
+  <h2>Descrição</h2>
+  <p><%= festival.description %></p>
+</div>
+<% } %>
+
+<div class="detail-body">
+  <h2>Edições</h2>
+  <% if (festival.editions && festival.editions.length > 0) { %>
+    <% festival.editions.forEach(function(edition) { %>
+      <div class="detail-info-item" style="margin-bottom: 16px;">
+        <span class="label">Edição <%= edition.year %></span>
+        <span class="value">
+          <%= edition.start_date ? new Date(edition.start_date).toLocaleDateString('pt-BR') : '' %>
+          <%= edition.end_date ? ' — ' + new Date(edition.end_date).toLocaleDateString('pt-BR') : '' %>
+        </span>
+        <div style="margin-top: 6px;">
+          <span class="badge badge-<%= edition.status %>"><%= edition.status %></span>
+        </div>
+        <% if (edition.events && edition.events.length > 0) { %>
+          <ul class="list-group" style="margin-top: 10px;">
+            <% edition.events.forEach(function(event) { %>
+              <li>
+                <a href="/eventos/<%= event.id %>"><%= event.title %></a>
+                <span style="color: var(--color-white-dim); font-size: 0.85rem;">
+                  — <%= new Date(event.date).toLocaleDateString('pt-BR') %>
+                </span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p style="color: var(--color-white-dim); font-size: 0.85rem; margin-top: 8px;">Nenhum evento vinculado a esta edição.</p>
+        <% } %>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>Nenhuma edição cadastrada para este festival.</p>
+  <% } %>
+</div>
+
+<p><a href="/festivais">← Voltar para festivais</a></p>
